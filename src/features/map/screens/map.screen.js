@@ -1,13 +1,10 @@
 import MapView, { Callout, Marker } from "react-native-maps";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
 
 import { LocationContext } from "../../../services/location/location.context";
 import { MapCallout } from "../components/map-callout.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Search } from "../components/search.component";
-import { Text } from "../../../components/typography/text.component";
 import styled from "styled-components";
 
 const Map = styled(MapView)`
@@ -65,10 +62,3 @@ export const MapScreen = ({ navigation }) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-});

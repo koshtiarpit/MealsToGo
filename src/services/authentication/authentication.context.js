@@ -1,11 +1,5 @@
 import React, { createContext, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { loginRequest, registerRequest } from "./authentication.service";
 
 export const AuthenticationContext = createContext();

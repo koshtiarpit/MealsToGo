@@ -1,10 +1,15 @@
+import React, { useState } from "react";
+
 import { List } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { ScrollView } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
-import styled from "styled-components";
-import { useState } from "react";
+
+const BreakfastIcon = (props) => <List.Icon {...props} icon="bread-slice" />;
+const LunchIcon = (props) => <List.Icon {...props} icon="hamburger" />;
+const DinnerIcon = (props) => <List.Icon {...props} icon="food-variant" />;
+const DrinksIcon = (props) => <List.Icon {...props} icon="cup" />;
 
 export const RestaurantDetailScreen = ({ route }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
@@ -19,7 +24,7 @@ export const RestaurantDetailScreen = ({ route }) => {
         <Spacer position={"bottom"} size={"large"}>
           <List.Accordion
             title="Breakfast"
-            left={(props) => <List.Icon {...props} icon="bread-slice" />}
+            left={BreakfastIcon}
             expanded={breakfastExpanded}
             onPress={() => setBreakfastExpanded(!breakfastExpanded)}
           >
@@ -28,7 +33,7 @@ export const RestaurantDetailScreen = ({ route }) => {
           </List.Accordion>
           <List.Accordion
             title="Lunch"
-            left={(props) => <List.Icon {...props} icon="hamburger" />}
+            left={LunchIcon}
             expanded={lunchExpanded}
             onPress={() => setLunchExpanded(!lunchExpanded)}
           >
@@ -38,7 +43,7 @@ export const RestaurantDetailScreen = ({ route }) => {
           </List.Accordion>
           <List.Accordion
             title="Dinner"
-            left={(props) => <List.Icon {...props} icon="food-variant" />}
+            left={DinnerIcon}
             expanded={dinnerExpanded}
             onPress={() => setDinnerExpanded(!dinnerExpanded)}
           >
@@ -48,7 +53,7 @@ export const RestaurantDetailScreen = ({ route }) => {
           </List.Accordion>
           <List.Accordion
             title="Drinks"
-            left={(props) => <List.Icon {...props} icon="cup" />}
+            left={DrinksIcon}
             expanded={drinksExpanded}
             onPress={() => setDrinksExpanded(!drinksExpanded)}
           >
