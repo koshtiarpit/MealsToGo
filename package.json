@@ -20,6 +20,7 @@
     "camelize": "^1.0.1",
     "css-to-react-native": "^3.2.0",
     "expo": "~48.0.15",
+    "expo-camera": "~13.2.1",
     "expo-font": "~11.1.1",
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.4",
