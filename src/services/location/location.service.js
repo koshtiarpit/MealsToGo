@@ -1,7 +1,12 @@
+import { isDevelopment, localHost } from "../../utils/env";
+
 import camelize from "camelize";
 import { locations } from "./location.mock";
 
 export const locationRequest = (searchTerm) => {
+  // return fetch(`${localHost}/geocode?city=${searchTerm}`).then((res) => {
+  //   return res.json();
+  // });
   return new Promise((resolve, reject) => {
     const locationMock = locations[searchTerm];
     if (!locationMock) {
