@@ -1,19 +1,23 @@
-import { isDevelopment, localHost } from "../../utils/env";
+import { isDevelopment, isMock, localHost } from "../../utils/env";
 
+import { Platform } from "react-native";
 import camelize from "camelize";
 import { locations } from "./location.mock";
 
 export const locationRequest = (searchTerm) => {
-  // return fetch(`${localHost}/geocode?city=${searchTerm}`).then((res) => {
-  //   return res.json();
-  // });
-  return new Promise((resolve, reject) => {
-    const locationMock = locations[searchTerm];
-    if (!locationMock) {
-      reject("not found");
-    }
-    resolve(locationMock);
-  });
+  if (!isMock && Platform.OS !== "android") {
+    return fetch(`${localHost}/geocode?city=${searchTerm}`).then((res) => {
+      return res.json();
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      const locationMock = locations[searchTerm];
+      if (!locationMock) {
+        reject("not found");
+      }
+      resolve(locationMock);
+    });
+  }
 };
 
 export const locationTransform = (result) => {

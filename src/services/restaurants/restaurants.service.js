@@ -1,19 +1,25 @@
-import { isDevelopment, localHost } from "../../utils/env";
+import { isDevelopment, isMock, localHost } from "../../utils/env";
 import { mockImages, mocks } from "./mocks";
 
+import { Platform } from "react-native";
 import camalize from "camelize";
 
 export const restaurantsRequest = (location = "37.7749295,-122.4194155") => {
-  // return fetch(`${localHost}/placesNearby?location=${location}`).then((res) => {
-  //   return res.json();
-  // });
-  return new Promise((resolve, reject) => {
-    const mock = mocks[location];
-    if (!mock) {
-      reject("not found");
-    }
-    resolve(mock);
-  });
+  if (!isMock && Platform.OS !== "android") {
+    return fetch(`${localHost}/placesNearby?location=${location}`).then(
+      (res) => {
+        return res.json();
+      }
+    );
+  } else {
+    return new Promise((resolve, reject) => {
+      const mock = mocks[location];
+      if (!mock) {
+        reject("not found");
+      }
+      resolve(mock);
+    });
+  }
 };
 
 export const restaurantsTransform = ({ results = [] }) => {
