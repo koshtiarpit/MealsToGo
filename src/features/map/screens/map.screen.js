@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../../services/location/location.context";
 import { MapCallout } from "../components/map-callout.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Search } from "../components/search.component";
 import styled from "styled-components";
 
@@ -13,7 +14,7 @@ const Map = styled(MapView)`
   overflow: visible;
 `;
 
-export const MapScreen = ({ navigation }) => {
+const RestaurantMap = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantsContext);
   const [latDelta, setLatDelta] = useState(0);
@@ -61,4 +62,12 @@ export const MapScreen = ({ navigation }) => {
       </Map>
     </>
   );
+};
+
+export const MapScreen = ({ navigation }) => {
+  const { location } = useContext(LocationContext);
+  if (!location) {
+    return <Map region={{ latitude: 0, longitude: 0 }} />;
+  }
+  return <RestaurantMap navigation={navigation} />;
 };

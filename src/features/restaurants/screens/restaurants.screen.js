@@ -4,12 +4,14 @@ import React, { useContext, useState } from "react";
 import { FadeInView } from "../../../components/animations/fade.animation";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { RestaurantList } from "../components/restaurant-list.styles";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Search } from "../components/search.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
@@ -38,9 +40,11 @@ const navigateToDetail = (item, navigation) =>
   navigation.navigate("RestaurantDetail", { restaurant: item });
 
 export const RestaurantsScreen = ({ navigation }) => {
-  const { isLoading, restaurants } = useContext(RestaurantsContext);
+  const { error: locationError } = useContext(LocationContext);
+  const { isLoading, restaurants, error } = useContext(RestaurantsContext);
   const { favourites } = useContext(FavouritesContext);
   const [isToggled, setIsToggled] = useState(false);
+  const hasError = !!error || !!locationError;
 
   return (
     <SafeArea>
@@ -59,11 +63,20 @@ export const RestaurantsScreen = ({ navigation }) => {
           onNavigate={navigation.navigate}
         />
       )}
-      <RestaurantList
-        data={restaurants}
-        renderItem={({ item }) => renderFlatlistItem(item, navigation)}
-        keyExtractor={(item) => item.name}
-      />
+      {hasError && (
+        <Spacer position="left" size="large">
+          <Text variant={"error"}>
+            {"Something went wrong retriving the data"}
+          </Text>
+        </Spacer>
+      )}
+      {!hasError && (
+        <RestaurantList
+          data={restaurants}
+          renderItem={({ item }) => renderFlatlistItem(item, navigation)}
+          keyExtractor={(item) => item.name}
+        />
+      )}
     </SafeArea>
   );
 };
