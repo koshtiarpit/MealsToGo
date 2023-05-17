@@ -1,10 +1,9 @@
-import { Camera, CameraType } from "expo-camera";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
-import { Button } from "react-native-paper";
+import { Camera } from "expo-camera";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Text } from "../../../components/typography/text.component";
 import styled from "styled-components";

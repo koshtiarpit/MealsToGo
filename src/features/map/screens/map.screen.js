@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../../services/location/location.context";
 import { MapCallout } from "../components/map-callout.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
-import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Search } from "../components/search.component";
 import styled from "styled-components";
 

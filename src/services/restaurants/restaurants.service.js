@@ -1,4 +1,4 @@
-import { isDevelopment, isMock, localHost } from "../../utils/env";
+import { isMock, localHost } from "../../utils/env";
 import { mockImages, mocks } from "./mocks";
 
 import { Platform } from "react-native";

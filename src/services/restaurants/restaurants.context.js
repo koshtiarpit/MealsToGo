@@ -34,7 +34,6 @@ export const RestaurantsContextProvider = ({ children }) => {
       const locationString = `${location.lat},${location.lng}`;
       retrieveRestaurants(locationString);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
